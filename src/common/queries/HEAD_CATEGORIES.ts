@@ -21,6 +21,7 @@ export const GET_HEAD_CATEGORIES_WITH_CATEGORIES = gql`
             icon
             color
             name
+            id
           }
         }
       }
