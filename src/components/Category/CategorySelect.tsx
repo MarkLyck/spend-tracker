@@ -1,49 +1,37 @@
 import React from 'react'
 import styled from '@emotion/native'
 import CategoryIcon from './CategoryIcon'
-import { TouchableOpacity } from 'react-native';
+import { Button, Icon } from '@ui-kitten/components';
 
 export * from './CategoryIcon'
 
-const Container = styled.View`
-    background-color: ${(p: any) => p.background};
-    height: 48px;
-    width: auto;
-    padding: 0 24px;
-    border-radius: 24px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-`
+const PlusIcon = (props: any) => <Icon {...props} name='plus' />
 
-const Title = styled.Text`
-    color: white;
-    font-weight: bold;
-    text-transform: capitalize;
-    align-self: center;
-    text-align: center;
-    font-size: 14px;
-    margin-right: 8px;
-`
-
-interface CategoryType {
+interface CategorySelectType {
     category: any
     onPress?: any
 }
 
-const noCategory = {
-    name: "Choose a category",
-    color: "gray",
-    icon: "coffee"
-}
+export const CategorySelect = ({ category, onPress, ...props }: CategorySelectType) => {
 
-export const CategorySelect = ({ category = noCategory, onPress }: CategoryType) => (
-    <TouchableOpacity onPress={onPress} >
-        <Container background={category.color} >
-            <Title>{category.name}</Title>
-            <CategoryIcon icon={category.icon} size={30} />
-        </Container>
-    </TouchableOpacity>
-)
+    if (!category) {
+        return (
+            <Button style={{ backgroundColor: 'gray', borderColor: 'gray' }} onPress={onPress} accessoryLeft={PlusIcon} {...props}>
+                CHOOSE CATEGORY
+            </Button>
+        )
+    }
+
+    return (
+        <Button
+            style={{
+                backgroundColor: category.color,
+                borderColor: category.color,
+            }}
+            onPress={onPress}
+            accessoryLeft={() => <CategoryIcon icon={category.icon} />}
+        >
+            { category.name.toUpperCase()}
+        </Button >
+    )
+}

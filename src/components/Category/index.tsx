@@ -5,6 +5,7 @@ import { TouchableOpacity } from 'react-native';
 
 export * from './CategoryIcon'
 export * from './CategorySelect'
+export * from './CategoryGrid'
 
 const CATEGORY_SIZE = '100'
 
